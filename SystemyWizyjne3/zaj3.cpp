@@ -123,16 +123,18 @@ int main()
 		{
 			//1).Zaimplementować pod przyciskiem ‘x’ funkcję, która wyświetli wynik operacji :
 			//obraz - blur(obraz, 9x9)
-			cv::blur(workImg, workImg, cv::Size(9, 9));
+			cv::blur(workImg, tmp1, cv::Size(9, 9));
+			workImg = workImg - tmp1;
 		}
 		break;
 		case 'y':
 		{
 			//2) Zaimplementować pod przyciskiem ‘y’ funkcję, która wyświetli wynik operacji :
 			//GaussianBlur(obraz, 3x3) - GaussianBlur(obraz, 7x7)
-			cv::GaussianBlur(workImg, workImg, cv::Size(3, 3), 0);
-			cv::GaussianBlur(workImg, workImg, cv::Size(7, 7), 0);
-
+			cv::GaussianBlur(workImg, tmp1, cv::Size(3, 3), 0);
+			cv::GaussianBlur(workImg, tmp2, cv::Size(7, 7), 0);
+			workImg = tmp1 - tmp2;
+			cv::threshold(workImg, workImg, 1, 255, cv::THRESH_BINARY);	//słabo widać efekt więc dodaje progowanie
 		}
 		break;
 		}
